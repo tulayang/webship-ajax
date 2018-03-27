@@ -1,0 +1,24 @@
+{
+  "name": "webship-ajax",
+  "version": "0.1.0",
+  "description": "The ajax module for webship development.",
+  "main": "dist/out",
+  "engines": {
+    "node": ">=8.9.4"
+  },
+  "author": "Wang Tong",
+  "scripts": {
+    "watch": "gulp watch --max_old_space_size=2048",
+    "build": "gulp build"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "awesome-typescript-loader": "^3.4.1",
+    "rimraf": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.2.2",
+    "webpack": "^3.10.0",
+    "webpack-stream": "^4.0.0"
+  },
+  "dependencies": {
+  }
+}
