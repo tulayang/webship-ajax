@@ -2,7 +2,7 @@
   "name": "webship-ajax",
   "version": "0.1.0",
   "description": "The ajax module for webship development.",
-  "main": "dist/out",
+  "main": "dist",
   "engines": {
     "node": ">=8.9.4"
   },
