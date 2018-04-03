@@ -28,7 +28,7 @@ function requestJSON(options: RawAjaxOption): Promise<[number, any]> {
           fail(e)
         }
       } else {
-        complete([req.status, null])
+        complete([req.status, req.responseText])
       }
     }
     req.onerror = (e) => {
@@ -92,7 +92,7 @@ export function postFormData(options: AjaxOption, name: string, value: string | 
           fail(e)
         }
       } else {
-        complete([req.status, null])
+        complete([req.status, req.responseText])
       }
     }
     req.onerror = (e) => {
