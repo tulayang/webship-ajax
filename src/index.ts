@@ -85,7 +85,7 @@ export function postFormData(options: AjaxOption, name: string, value: string | 
     }
     req.onload = () => {
       let contentType = req.getResponseHeader('Content-Type')
-      if (contentType.indexOf('application/json') > -1) {
+      if (typeof contentType === 'string' && contentType.indexOf('application/json') > -1) {
         try {
           complete([req.status, JSON.parse(req.responseText)])
         } catch (e) {
