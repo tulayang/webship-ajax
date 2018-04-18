@@ -1,6 +1,6 @@
 {
   "name": "webship-ajax",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "The ajax module for webship development.",
   "main": "dist",
   "engines": {

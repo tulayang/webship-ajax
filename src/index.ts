@@ -89,7 +89,7 @@ export function deleteJSON(options: AjaxOption): Promise<[number, any]> {
   return requestJSON(opt)
 }
 
-export function requestFormData(options: RawAjaxFormDataOption): Promise<[number, any]> {
+function requestFormData(options: RawAjaxFormDataOption): Promise<[number, any]> {
   return new Promise((complete, fail) => {
     let req = new XMLHttpRequest()
     req.ontimeout = (e) => {
