@@ -9,7 +9,20 @@ export interface AjaxOption {
   }
 }
 
+export interface AjaxFormDataOption {
+  url: string
+  headers?: {
+    [key: string]: string
+  }
+  timeout?: number
+  formData: FormData
+}
+
 interface RawAjaxOption extends AjaxOption {
+  method: string
+}
+
+interface RawAjaxFormDataOption extends AjaxFormDataOption {
   method: string
 }
 
@@ -76,10 +89,9 @@ export function deleteJSON(options: AjaxOption): Promise<[number, any]> {
   return requestJSON(opt)
 }
 
-export function postFormData(options: AjaxOption, name: string, value: string | Blob): Promise<[number, any]> {
+export function requestFormData(options: RawAjaxFormDataOption): Promise<[number, any]> {
   return new Promise((complete, fail) => {
     let req = new XMLHttpRequest()
-    let formData = new FormData()
     req.ontimeout = (e) => {
       fail(e)
     }
@@ -101,13 +113,25 @@ export function postFormData(options: AjaxOption, name: string, value: string | 
     if (typeof options.timeout === 'number' && options.timeout > 0) {
       req.timeout = options.timeout
     }
-    req.open('POST', options.url, true)
+    req.open(options.method, options.url, true)
     if (typeof options.headers === 'object' && options.headers !== null) {
       for (let name in options.headers) {
         req.setRequestHeader(name, options.headers[name])
       }
+      delete options.headers['Content-Type']
     }
-    formData.append(name, value)
-    req.send(formData)
+    req.send(options.formData)
   })
+}
+
+export function postFormData(options: AjaxFormDataOption): Promise<[number, any]> {
+  let opt = options as RawAjaxFormDataOption
+  opt.method = 'POST'
+  return requestFormData(opt)
+}
+
+export function putFormData(options: AjaxFormDataOption): Promise<[number, any]> {
+  let opt = options as RawAjaxFormDataOption
+  opt.method = 'PUT'
+  return requestFormData(opt)
 }
